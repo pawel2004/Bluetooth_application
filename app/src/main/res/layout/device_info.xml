@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/linear_button_height"
+        android:src="@drawable/bluetooth_icon"
+        android:layout_weight="2"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="@dimen/linear_button_height"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/linear_button_height"
+            android:layout_weight="2"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/text_size"
+            android:gravity="center"
+            android:id="@+id/t1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/linear_button_height"
+            android:layout_weight="2"
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_size2"
+            android:gravity="center"
+            android:id="@+id/t2"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/linear_button_height"
+            android:layout_weight="2"
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_size2"
+            android:gravity="center"
+            android:id="@+id/t3"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/linear_button_height"
+        android:layout_weight="2"
+        android:text="@string/connect"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size"
+        android:gravity="center"/>
+
+</LinearLayout>

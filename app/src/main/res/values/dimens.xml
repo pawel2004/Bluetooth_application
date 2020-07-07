@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="drawer_width">300dp</dimen>
+    <dimen name="imageView_height">120dp</dimen>
+    <dimen name="linear_button_height">60dp</dimen>
+    <dimen name="text_size">16sp</dimen>
+    <dimen name="text_size2">12sp</dimen>
+
+</resources>
