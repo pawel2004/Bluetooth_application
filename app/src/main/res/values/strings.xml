@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Bluetooth application</string>
     <string name="connect">Połącz</string>
+    <string name="server_start">STARTUJ SERWER</string>
+    <string name="status">status</string>
+    <string name="send">WYŚLIJ WIADOMOŚĆ</string>
+    <string name="placeholder">Komunikat</string>
 </resources>
