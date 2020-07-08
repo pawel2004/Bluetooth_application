@@ -23,6 +23,8 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     //zmienne
     private ListView listView1;
     private ListView listView2;
+    private LinearLayout linear1;
     private ArrayList<String> list = new ArrayList<>();
     private BluetoothAdapter bluetoothAdapter;
     private boolean bluetoothState;
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView status;
     private ProgressDialog progressDialog;
     private Communication communication;
+    private EditText et1;
 
     //serwerowe
     private static final String APP_NAME = "Gryboś_chat";
@@ -76,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         listView1 = findViewById(R.id.list_view1);
         listView2 = findViewById(R.id.list_view2);
 
+        linear1= findViewById(R.id.linear1);
+
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         gps_manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -84,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         connect = findViewById(R.id.connect);
         send = findViewById(R.id.send);
         status = findViewById(R.id.status);
+        et1 = findViewById(R.id.edit_text);
 
         progressDialog = new ProgressDialog(MainActivity.this);
         progressDialog.setMessage("server listening...");
@@ -167,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
 
                         }else {
 
-                            if (!gps_manager.isLocationEnabled()){
+                            if (!gps_manager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
 
                                 Log.d("location", "Nie ma GPS!");
 
@@ -211,6 +218,17 @@ public class MainActivity extends AppCompatActivity {
                 Server server = new Server();
                 server.start();
                 progressDialog.show();
+
+            }
+        });
+
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                byte[] send_tmp = et1.getText().toString().getBytes();
+
+                communication.writeMessage(send_tmp);
 
             }
         });
@@ -379,6 +397,9 @@ public class MainActivity extends AppCompatActivity {
                     message.what = 0;
                     handler.sendMessage(message);
 
+                    communication = new Communication(bluetoothClientSocket);
+                    communication.start();
+
                     break;
 
                 }
@@ -422,6 +443,8 @@ public class MainActivity extends AppCompatActivity {
                 Message message = Message.obtain();
                 message.what = 1;
                 handler.sendMessage(message);
+                communication = new Communication(bluetoothSocket);
+                communication.start();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -442,6 +465,16 @@ public class MainActivity extends AppCompatActivity {
 
                 case 1:
                     status.setText("Połączono!!!");
+                    break;
+
+                case 2:
+                    status.setText("Coś przyszło!!!");
+                    byte[] readBuffer = (byte[]) message.obj;
+                    String msg = new String(readBuffer, 0, message.arg1);
+                    TextView txt1 = new TextView(MainActivity.this);
+                    txt1.setText(msg);
+                    linear1.addView(txt1);
+                    Log.d("xxx", msg);
                     break;
             }
 
@@ -494,7 +527,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (bytes > 0){
 
-                    handler.obtainMessage(1, bytes, -1, buffer).sendToTarget();
+                    handler.obtainMessage(2, bytes, -1, buffer).sendToTarget();
 
                 }
 

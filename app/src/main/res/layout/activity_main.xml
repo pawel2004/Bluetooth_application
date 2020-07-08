@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/button_height"
             android:text="@string/server_start"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size"
@@ -20,27 +21,31 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/status_height"
             android:text="@string/status"
             android:textColor="@color/red"
-            android:textSize="@dimen/text_size2"
-            android:layout_below="@+id/connect"
-            android:id="@+id/status"/>
+            android:textSize="@dimen/text_size"
+            android:id="@+id/status"
+            android:layout_marginLeft="@dimen/margin_left"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/listView_height"
+            android:orientation="vertical"
+            android:id="@+id/linear1"
+            android:layout_marginLeft="@dimen/margin_left"/>
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/list_view2"
-            android:layout_below="@+id/status">
+            android:layout_height="@dimen/listView_height"
+            android:id="@+id/list_view2">
 
         </ListView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true"
-            android:layout_above="@+id/list_view2">
+            android:orientation="horizontal">
 
             <EditText
                 android:layout_width="match_parent"
@@ -61,7 +66,7 @@
 
         </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="@dimen/drawer_width"
@@ -85,4 +90,4 @@
 
     </LinearLayout>
 
-</android.support.v4.widget.DrawerLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
